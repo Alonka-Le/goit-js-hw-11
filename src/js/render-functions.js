@@ -1,28 +1,41 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 export const createGalleryItemMarkup = images => {
   return images
     .map(
-      ({ webformatURL, tags, likes, views, comments, downloads }) =>
+      ({
+        largeImageURL,
+        webformatURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) =>
         `<div>
-        <img
+          <a href="${largeImageURL}" class="gallery-img">
+          <img
           src="${webformatURL}"
           alt="${tags}"
           class="gallery-img"
         />
-       <ul class="content">
-        <li class="text-content">Likes: ${likes}</li>
-        <li class="text-content">Views: ${views}</li>
-        <li class="text-content">Comments: ${comments}</li>
-        <li class="text-content">Downloads: ${downloads}</li>
-    </ul>
+        <div class='content'>
+            <div class="item-list-info-text">
+                <h3 clasc"text-content-title">Likes</h3>
+                <p class="text-content">${likes}</p>
+            </div>
+            <div class="item-list-info-text">
+                <h3 clasc"text-content-title">Views</h3>
+                <p class="text-content">${views}</p>
+            </div>
+            <div class="item-list-info-text">
+                <h3 clasc"text-content-title">Comments</h3>
+                <p class="text-content">${comments}</p>
+            </div>
+            <div class="item-list-info-text">
+                <h3 clasc"text-content-title">Downloads</h3>
+                <p class="text-content">${downloads}</p>
+            </div>
+        </div>
       </div>`
     )
     .join('');
 };
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionPosition: 'bottom',
-  captionDelay: 250,
-});
